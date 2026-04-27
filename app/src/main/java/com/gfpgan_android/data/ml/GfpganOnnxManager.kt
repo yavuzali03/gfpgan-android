@@ -44,11 +44,26 @@ class GfpganOnnxManager(
             }
             
             // Copy model from assets to internal storage (avoid OOM)
-            val modelFile = File(context.filesDir, "GFPGANv1.4_mobile_fp16_fixed.onnx")
+            val modelFile = File(context.filesDir, "ai_models/GFPGANv1.4_mobile_fp16_fixed.onnx")
             
-            if (!modelFile.exists() || modelFile.length() == 0L) {
+            var shouldCopy = true
+            try {
+                val assetDescriptor = context.assets.openFd("ai_models/GFPGANv1.4_mobile_fp16_fixed.onnx")
+                val assetSize = assetDescriptor.length
+                assetDescriptor.close()
+                if (modelFile.exists() && modelFile.length() == assetSize) {
+                    shouldCopy = false
+                }
+            } catch (e: Exception) {
+                if (modelFile.exists() && modelFile.length() > 1024) { // Pointers are small
+                    shouldCopy = false
+                }
+            }
+
+            if (shouldCopy) {
                 Log.d(tag, "📥 Copying GFPGAN FP16 model to internal storage...")
-                context.assets.open("GFPGANv1.4_mobile_fp16_fixed.onnx").use { input ->
+                context.assets.open("ai_models/GFPGANv1.4_mobile_fp16_fixed.onnx").use { input ->
+                    modelFile.parentFile?.mkdirs()
                     modelFile.outputStream().use { output ->
                         input.copyTo(output)
                     }

@@ -45,11 +45,6 @@ sealed class Screen(val route: String) {
      */
     data object FaceRestore : Screen("face_restore")
     
-    /**
-     * CodeFormer Only screen - Pure CodeFormer without ESRGAN
-     * Direct face restoration test
-     */
-    data object CodeFormerOnly : Screen("codeformer_only")
     
     /**
      * RealESRGAN Test screen - Pure 2x upscaling test

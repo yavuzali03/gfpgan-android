@@ -6,18 +6,18 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 /**
- * PhotoEnhancerApplication - Ana Application sınıfı
+ * GfpganApplication - Ana Application sınıfı
  * 
  * Koin DI başlatma
  */
-class PhotoEnhancerApplication : Application() {
+class GfpganApplication : Application() {
     
     override fun onCreate() {
         super.onCreate()
         
         // Koin DI başlat
         startKoin {
-            androidContext(this@PhotoEnhancerApplication)
+            androidContext(this@GfpganApplication)
             modules(appModule)
         }
     }

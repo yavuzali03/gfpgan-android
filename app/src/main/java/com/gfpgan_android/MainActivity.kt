@@ -16,7 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.gfpgan_android.presentation.navigation.AppNavGraph
-import com.gfpgan_android.ui.theme.PhotoEnhancerTheme
+import com.gfpgan_android.ui.theme.GfpganTheme
 import com.gfpgan_android.util.OpenCVHelper
 import com.gfpgan_android.util.GFPGANNative
 import java.io.File
@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
             gfpganNative = GFPGANNative()
 
             // Modeli Assets'ten Telefona Kopyala (C++ okuyabilsin diye)
-            val modelPath = getModelPath("GFPGANv1.4_mobile_fp16_fixed.onnx")
+            val modelPath = getModelPath("ai_models/GFPGANv1.4_mobile_fp16_fixed.onnx")
 
             // Native Init Fonksiyonunu Çağır
             gfpganNative.initModel(modelPath)
@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
             val systemDarkMode = isSystemInDarkTheme()
             var isDarkMode by rememberSaveable { mutableStateOf(systemDarkMode) }
 
-            PhotoEnhancerTheme(darkTheme = isDarkMode) {
+            GfpganTheme(darkTheme = isDarkMode) {
                 val navController = rememberNavController()
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -78,8 +78,22 @@ class MainActivity : ComponentActivity() {
     private fun getModelPath(assetName: String): String {
         val file = File(filesDir, assetName)
 
-        // Dosya zaten varsa ve boyutu > 0 ise tekrar kopyalama (Performans)
-        if (file.exists() && file.length() > 0) {
+        var shouldCopy = true
+        try {
+            val assetDescriptor = assets.openFd(assetName)
+            val assetSize = assetDescriptor.length
+            assetDescriptor.close()
+            if (file.exists() && file.length() == assetSize) {
+                shouldCopy = false
+            }
+        } catch (e: Exception) {
+            // openFd might fail for compressed assets or specific files, fallback
+            if (file.exists() && file.length() > 1024) { // LFS pointers are < 1KB
+                shouldCopy = false
+            }
+        }
+
+        if (!shouldCopy) {
             return file.absolutePath
         }
 

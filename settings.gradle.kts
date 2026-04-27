@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "photoEnhancer"
+rootProject.name = "gfpgan-android"
 include(":app")
  

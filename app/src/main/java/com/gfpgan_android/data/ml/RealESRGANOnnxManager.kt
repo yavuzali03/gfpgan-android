@@ -39,11 +39,26 @@ class RealESRGANOnnxManager(private val context: Context) {
             }
             
             // Copy model from assets to internal storage
-            val modelFile = File(context.filesDir, "RealESRGAN_x2plus_hybrid.onnx")
+            val modelFile = File(context.filesDir, "ai_models/RealESRGAN_x2plus_hybrid.onnx")
             
-            if (!modelFile.exists() || modelFile.length() == 0L) {
+            var shouldCopy = true
+            try {
+                val assetDescriptor = context.assets.openFd("ai_models/RealESRGAN_x2plus_hybrid.onnx")
+                val assetSize = assetDescriptor.length
+                assetDescriptor.close()
+                if (modelFile.exists() && modelFile.length() == assetSize) {
+                    shouldCopy = false
+                }
+            } catch (e: Exception) {
+                if (modelFile.exists() && modelFile.length() > 1024) { // Pointers are small
+                    shouldCopy = false
+                }
+            }
+
+            if (shouldCopy) {
                 Log.d(tag, "Copying RealESRGAN Hybrid model to internal storage...")
-                context.assets.open("RealESRGAN_x2plus_hybrid.onnx").use { input ->
+                context.assets.open("ai_models/RealESRGAN_x2plus_hybrid.onnx").use { input ->
+                    modelFile.parentFile?.mkdirs()
                     modelFile.outputStream().use { output ->
                         input.copyTo(output)
                     }

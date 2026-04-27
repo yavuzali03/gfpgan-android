@@ -90,10 +90,6 @@ fun AppNavGraph(
             com.gfpgan_android.presentation.screens.FaceRestoreScreen()
         }
         
-        // CodeFormer Only Screen - Pure CodeFormer
-        composable(route = Screen.CodeFormerOnly.route) {
-            com.gfpgan_android.presentation.screens.CodeFormerOnlyScreen()
-        }
         
         // RealESRGAN Test Screen
         composable(route = Screen.RealESRGANTest.route) {

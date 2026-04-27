@@ -99,7 +99,7 @@ fun EditorScreen(
                 
                 // Title
                 Text(
-                    text = "Photo Enhancer",
+                    text = "GFPGAN Android",
                     style = MaterialTheme.typography.titleMedium,
                     color = Color.White
                 )
@@ -191,25 +191,23 @@ fun EditorScreen(
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 
-                Row(
+                Box(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    contentAlignment = Alignment.Center
                 ) {
-                    // GFPGAN -> Gerçekçi (Realistic)
                     com.gfpgan_android.presentation.components.ModelSelectionCard(
-                        title = "Gerçekçi",
-                        subtitle = "Doğal Görünüm",
+                        title = "Gerçekçi (GFPGAN)",
+                        subtitle = "Doğal Yüz Onarımı",
                         iconCode = "\uf007", // User icon
-                        isSelected = selectedModel == EditorViewModel.AIModel.GFPGAN,
-                        onClick = { viewModel.selectModel(EditorViewModel.AIModel.GFPGAN) },
-                        modifier = Modifier.weight(1f),
+                        isSelected = true,
+                        onClick = { /* Only one model available */ },
+                        modifier = Modifier.fillMaxWidth(0.6f),
                         enabled = !isProcessing,
                         selectedGradientColors = listOf(
                             Color(0xFFf4d444),
                             Color(0xFFf3696e)
                         )
                     )
-
                 }
             }
             
@@ -260,8 +258,8 @@ fun EditorScreen(
                     valueRange = 0f..1f,
                     enabled = !isProcessing,
                     colors = SliderDefaults.colors(
-                        thumbColor = if (selectedModel == EditorViewModel.AIModel.GFPGAN) Color(0xFFf4d444) else Color(0xFF6274e7),
-                        activeTrackColor = if (selectedModel == EditorViewModel.AIModel.GFPGAN) Color(0xFFf4d444) else Color(0xFF6274e7),
+                        thumbColor = Color(0xFFf4d444),
+                        activeTrackColor = Color(0xFFf4d444),
                         inactiveTrackColor = Color.White.copy(alpha = 0.2f)
                     )
                 )
@@ -270,16 +268,10 @@ fun EditorScreen(
             Spacer(modifier = Modifier.height(24.dp))
             
             // Action Buttons
-            val currentGradient = when (selectedModel) {
-                EditorViewModel.AIModel.GFPGAN -> listOf(
-                    Color(0xFFf4d444),
-                    Color(0xFFf3696e)
-                )
-                EditorViewModel.AIModel.CODEFORMER -> listOf(
-                    Color(0xFF6274e7),
-                    Color(0xFF8752a3)
-                )
-            }
+            val currentGradient = listOf(
+                Color(0xFFf4d444),
+                Color(0xFFf3696e)
+            )
 
             if (resultBitmap == null) {
                 com.gfpgan_android.presentation.components.PrimaryButton(

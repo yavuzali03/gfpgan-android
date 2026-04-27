@@ -153,7 +153,7 @@ fun HomeScreen(
                 )
 
                 Text(
-                    text = "AI Photo Enhancer",
+                    text = "GFPGAN Android",
                     style = MaterialTheme.typography.headlineLarge.merge(
                         androidx.compose.ui.text.TextStyle(
                             brush = Brush.linearGradient(

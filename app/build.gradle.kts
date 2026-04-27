@@ -6,12 +6,11 @@ plugins {
 
 android {
     namespace = "com.gfpgan_android"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
+    ndkVersion = "27.1.12297006"
 
     defaultConfig {
-        applicationId = "com.gfpgan-android"
+        applicationId = "com.gfpgan_android"
         minSdk = 30
         targetSdk = 36
         versionCode = 1

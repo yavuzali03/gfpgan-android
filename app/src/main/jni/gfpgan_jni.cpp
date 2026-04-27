@@ -14,7 +14,7 @@ Ort::Env *env = nullptr;
 Ort::Session *session = nullptr;
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_photoenhancer_util_GFPGANNative_initModel(JNIEnv *env_jni,
+Java_com_gfpgan_1android_util_GFPGANNative_initModel(JNIEnv *env_jni,
                                                    jobject /* this */,
                                                    jstring modelPathStr) {
 
@@ -56,7 +56,7 @@ Java_com_photoenhancer_util_GFPGANNative_initModel(JNIEnv *env_jni,
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_photoenhancer_util_GFPGANNative_enhance(
+Java_com_gfpgan_1android_util_GFPGANNative_enhance(
     JNIEnv *jenv, jobject /* this */,
     jobject inputBitmap,  // Bulanık resim
     jobject outputBitmap) // Boş ama boyutu ayarlanmış çıktı resmi

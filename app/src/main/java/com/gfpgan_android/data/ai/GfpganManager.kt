@@ -52,7 +52,7 @@ class GfpganManager(context: Context) {
         try {
             android.util.Log.i(TAG, "Loading GFPGAN ONNX model...")
             
-            val modelPath = copyAssetToFile("GFPGANv1.4_mobile_fp16_fixed.onnx")
+            val modelPath = copyAssetToFile("ai_models/GFPGANv1.4_mobile_fp16_fixed.onnx")
             gfpganNative.initModel(modelPath)
             
             isModelLoaded = true
@@ -70,11 +70,24 @@ class GfpganManager(context: Context) {
      */
     private fun copyAssetToFile(assetName: String): String {
         val file = File(appContext.filesDir, assetName)
-        if (file.exists() && file.length() > 0) {
-            return file.absolutePath
+        
+        try {
+            val assetDescriptor = appContext.assets.openFd(assetName)
+            val assetSize = assetDescriptor.length
+            assetDescriptor.close()
+            
+            if (file.exists() && file.length() == assetSize) {
+                return file.absolutePath
+            }
+        } catch (e: Exception) {
+            // openFd might fail for compressed assets, fallback to length check
+            if (file.exists() && file.length() > 1024) { // LFS pointers are < 1KB
+                return file.absolutePath
+            }
         }
         
         appContext.assets.open(assetName).use { input ->
+            file.parentFile?.mkdirs()
             FileOutputStream(file).use { output ->
                 input.copyTo(output)
             }

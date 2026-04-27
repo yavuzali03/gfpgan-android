@@ -43,13 +43,13 @@ private val LightColorScheme = lightColorScheme(
 )
 
 /**
- * PhotoEnhancer App Theme
+ * GFPGAN App Theme
  * 
  * @param darkTheme Dark mode aktif mi? (default: sistem ayarı)
  * @param content Composable content
  */
 @Composable
-fun PhotoEnhancerTheme(
+fun GfpganTheme(
     darkTheme: Boolean = true, // Force Dark Mode default
     content: @Composable () -> Unit
 ) {
