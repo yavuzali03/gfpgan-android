@@ -40,7 +40,7 @@ Proje, hem Kotlin hem de C++ katmanlarını birleştiren hibrit bir yapıda tasa
 ### Kurulum
 1. Repoyu klonlayın:
    ```bash
-   git clone https://github.com/kullaniciadi/gfpgan-android.git
+   git clone https://github.com/yavuzali03/gfpgan-android.git
    ```
 2. Projeyi Android Studio ile açın.
 3. `app/src/main/assets/ai_models` dizininde ONNX modellerinin (`GFPGANv1.4_mobile_fp16_fixed.onnx` vb.) olduğundan emin olun.
@@ -48,5 +48,24 @@ Proje, hem Kotlin hem de C++ katmanlarını birleştiren hibrit bir yapıda tasa
 
 ---
 
-## 📸 Ekran Görüntüleri
-(screenshots/Screenshot.png)
+## 📸 Ekran Görüntüsü
+
+<p align="center">
+  <img src="screenshots/Screenshot.png" width="400" alt="App Screenshot">
+</p>
+
+---
+
+## 🤝 Atıflar ve Teşekkür (Credits)
+
+Bu proje aşağıdaki açık kaynaklı modelleri ve kütüphaneleri temel almaktadır:
+
+- **GFPGAN:** [TencentARC/GFPGAN](https://github.com/TencentARC/GFPGAN) - LouisXiu et al.
+- **Real-ESRGAN:** [xinntao/Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) - Xintao Wang et al.
+- **ONNX Runtime:** [microsoft/onnxruntime](https://github.com/microsoft/onnxruntime)
+
+---
+
+## 📄 Lisans
+
+Bu proje **MIT Lisansı** altında lisanslanmıştır. Kullanılan modellerin (GFPGAN, Real-ESRGAN) kendi lisans şartlarına tabi olduğunu lütfen unutmayın.
