@@ -49,23 +49,4 @@ Proje, hem Kotlin hem de C++ katmanlarını birleştiren hibrit bir yapıda tasa
 ---
 
 ## 📸 Ekran Görüntüleri
-
-| Ana Ekran | Editör | Sonuç Karşılaştırma |
-|:---:|:---:|:---:|
-| ![Home](screenshots/Screenshot.png) | ![Editor](https://via.placeholder.com/200x400?text=Editor) | ![Result](https://via.placeholder.com/200x400?text=Result) |
-
----
-
-## 🤝 Atıflar ve Teşekkür (Credits)
-
-Bu proje aşağıdaki açık kaynaklı modelleri ve kütüphaneleri temel almaktadır:
-
-- **GFPGAN:** [TencentARC/GFPGAN](https://github.com/TencentARC/GFPGAN) - LouisXiu et al.
-- **Real-ESRGAN:** [xinntao/Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) - Xintao Wang et al.
-- **ONNX Runtime:** [microsoft/onnxruntime](https://github.com/microsoft/onnxruntime)
-
----
-
-## 📄 Lisans
-
-Bu proje **MIT Lisansı** altında lisanslanmıştır. Kullanılan modellerin (GFPGAN, Real-ESRGAN) kendi lisans şartlarına tabi olduğunu lütfen unutmayın.
+(screenshots/Screenshot.png)
